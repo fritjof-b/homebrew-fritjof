@@ -1,4 +1,5 @@
 class Baler < Formula
+  include Language::Python::Shebang
   include Language::Python::Virtualenv
 
   desc "Machine learning based compression tool for scientific data"
@@ -8,22 +9,12 @@ class Baler < Formula
   sha256 "23e15a70d58a8625d7b3e9a074d88a96bfe2b0054e22a17bbcffb3744b749d1b"
   license "Apache-2.0"
 
-  depends_on "poetry" => :build
+#   depends_on "poetry" => :build
   depends_on "python@3.9"
 
   def install
-    ENV["PYTHONPATH"] = libexec/"lib/python3.9/site-packages"
-    system "poetry", "install", "--no-dev", "--verbose"  # Add verbose flag to get detailed output
-    system "ls", "-a"
-    system "poetry", "env", "info"
-
-    if File.exist?(".venv")
-      ohai "Successfully found .venv directory."
-    else
-      opoo "No .venv directory found, creating a new virtual environment and installing the project."
-      venv = virtualenv_create(libexec, "python3")
-      system venv.pip_install_and_link buildpath
-    end
+    rewrite_shebang detected_python_shebang, "baler"
+    bin.install "baler"
   end
 
   test do
