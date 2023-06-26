@@ -9,3 +9,4 @@ Or `brew tap fritjof-b/fritjof` and then `brew install <formula>`.
 ## Documentation
 
 `brew help`, `man brew` or check [Homebrew's documentation](https://docs.brew.sh).
+test
