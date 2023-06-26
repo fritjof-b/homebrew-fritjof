@@ -1,7 +1,7 @@
 class Baler < Formula
   include Language::Python::Virtualenv
 
-  desc "A machine learning based compression tool for scientific data"
+  desc "Machine learning based compression tool for scientific data"
   homepage "https://baler-collaboration.github.io/"
   url "https://github.com/fritjof-b/baler/archive/refs/tags/brew-experimental.tar.gz"
   version "1.0"
@@ -17,12 +17,12 @@ class Baler < Formula
     system "ls", "-a"
     system "poetry", "env", "info"
 
-    if !File.exist?(".venv")
+    if File.exist?(".venv")
+      ohai "Successfully found .venv directory."
+    else
       opoo "No .venv directory found, creating a new virtual environment and installing the project."
       venv = virtualenv_create(libexec, "python3")
       system venv.pip_install_and_link buildpath
-    else
-      ohai "Successfully found .venv directory."
     end
   end
 
