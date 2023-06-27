@@ -10,7 +10,6 @@ class Baler < Formula
   license "Apache-2.0"
 
   depends_on "python@3.9"
-    
 
   def install
     virtualenv_create(libexec, "python3.9")
